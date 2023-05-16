@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#define BUFSIZE 1024
+
 #include "SDL.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +10,8 @@
 #include <iostream>
 #include <SDL_ttf.h>
 #include <string>
+#include <windows.h>
+#include "serialport.h"
 
 class Game
 {

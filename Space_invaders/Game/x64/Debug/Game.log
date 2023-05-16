@@ -1,1 +1,19 @@
-﻿  Game.vcxproj -> C:\programming\c++\space_invaders\Space_invaders\x64\Debug\Game.exe
+﻿  alien.cpp
+  box.cpp
+  bullet.cpp
+  game.cpp
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(155,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(171,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(187,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(203,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(219,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(235,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(251,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(267,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  graphics.cpp
+  main.cpp
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\main.cpp(46,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  player.cpp
+  serialport.cpp
+  Generating Code...
+  Game.vcxproj -> C:\programming\c++\arduino_tool_space_invaders\Space_invaders\x64\Debug\Game.exe
