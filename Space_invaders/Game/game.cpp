@@ -1,8 +1,4 @@
 #include "game.h"
-#include "graphics.h"
-#include "bullet.h"
-#include "alien.h"
-
 
 static std::vector<Bullet> bullets;
 static std::vector<Alien> aliens1;
@@ -36,9 +32,15 @@ SDL_Event Game::event;
 Graphics graphics;
 Player player;
 
+// Open serial port
+static HANDLE serialHandle = openSerialPort();
+
 
 Game::Game()
 {
+	restart = false;
+	
+
 	_running = true;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING && TTF_Init()) == 0)
@@ -72,6 +74,22 @@ SDL_Texture* bulletTexture = graphics.loadMedia("../media/bullet2.png");
 SDL_Texture* alienTexture1 = graphics.loadMedia("../media/alien1.png");
 SDL_Texture* alienTexture2 = graphics.loadMedia("../media/alien2.png");
 
+void Game::restartGame()
+{
+	aliens1.clear();
+	aliens2.clear();
+	aliens3.clear();
+	aliens4.clear();
+	aliens5.clear();
+	aliens6.clear();
+	aliens7.clear();
+	aliens8.clear();
+
+	highScore = 0;
+	player.isDestroyed = false;
+
+	initializeAliens();
+}
 
 void Game::initializeAliens()
 {
@@ -114,6 +132,12 @@ void Game::initializeAliens()
 
 void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, int randomAlien3, int randomAlien4, int randomAlien5, int randomAlien6, int randomAlien7, int randomAlien8)
 {
+	if (readFromPort(serialHandle) == "RESTART") {
+		restart = true;
+		std::cout << "Restart\n";
+	}
+
+	//std::cout << readFromPort(serialHandle) << "\n";
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -138,7 +162,12 @@ void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, in
 					bullets.back().bulletYpos = player.getYPos() - 16;
 				}	
 				break;
+			case SDLK_r:
+				restart = true;
+				break;
 			}
+
+			
 
 		}
 	
@@ -699,6 +728,7 @@ void Game::clean()
 	SDL_DestroyWindow(graphics.getWindow());
 	SDL_DestroyRenderer(graphics.getRenderer());
 	SDL_Quit();
+	CloseHandle(serialHandle);
 	std::cout << "Bullet vector size: \n" << bullets.size() << std::endl;
 	std::cout << "Aliens1 vector size: \n" << aliens1.size() << std::endl;
 	std::cout << "Game Cleaned!\n";

@@ -7,11 +7,6 @@ Game* game = nullptr;
 
 int main(int argc, char* argv[])
 {
-	// Open serial port
-	openSerialPort();
-	
-
-	//-------------------------------------------------------------------------------------
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 	Uint32 frameStart;
@@ -24,6 +19,10 @@ int main(int argc, char* argv[])
 	// Game loop
 	while (game->Running())
 	{
+		if (game->restart) {
+			game->restartGame();
+			game->restart = false;
+		}
 		frameStart = SDL_GetTicks();
 		int randomNumber = rand() % 50 + 1;
 		int randomAlien1 = rand() % 10 + 0;
@@ -47,6 +46,6 @@ int main(int argc, char* argv[])
 
 	game->clean();
 	delete game;
-	CloseHandle(serialHandle);
+	
 	return 0;
 }

@@ -1,17 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 
-#define BUFSIZE 1024
 
 #include "SDL.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <ctime>
-#include <iostream>
 #include <SDL_ttf.h>
 #include <string>
-#include <windows.h>
 #include "serialport.h"
+#include "graphics.h"
+#include "bullet.h"
+#include "alien.h"
 
 class Game
 {
@@ -31,6 +30,10 @@ public:
 	void update();
 	void render();
 	void clean();
+	
+	bool restart;
+
+	void restartGame();
 
 	void initializeAliens();
 
