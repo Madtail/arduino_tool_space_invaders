@@ -31,11 +31,15 @@ public:
 	void render();
 	void clean();
 	
+	
 	bool restart;
 
 	void restartGame();
 
 	void initializeAliens();
+
+	std::string GetLastErrorAsString();
+	
 
 	TTF_Font* font;
 	SDL_Color white;

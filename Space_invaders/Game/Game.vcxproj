@@ -140,6 +140,7 @@
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="serialib.cpp" />
     <ClCompile Include="serialport.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="serialib.h" />
     <ClInclude Include="serialport.h" />
   </ItemGroup>
   <ItemGroup>

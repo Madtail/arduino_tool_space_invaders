@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\work\prog_projects\arduino_tool_space_invaders\Space_invaders\x64\Debug\Game.exe</FullPath>
+      <FullPath>C:\programming\c++\arduino_tool_space_invaders\Space_invaders\x64\Debug\Game.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

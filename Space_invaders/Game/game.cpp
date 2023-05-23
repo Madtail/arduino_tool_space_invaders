@@ -32,9 +32,34 @@ SDL_Event Game::event;
 Graphics graphics;
 Player player;
 
-// Open serial port
-static HANDLE serialHandle = openSerialPort();
+// Open serial port object
+static serialib serial;
 
+
+//Returns the last Win32 error, in string format. Returns an empty string if there is no error.
+std::string Game::GetLastErrorAsString()
+{
+	//Get the error message ID, if any.
+	DWORD errorMessageID = ::GetLastError();
+	if (errorMessageID == 0) {
+		return std::string(); //No error message has been recorded
+	}
+
+	LPSTR messageBuffer = nullptr;
+
+	//Ask Win32 to give us the string version of that message ID.
+	//The parameters we pass in, tell Win32 to create the buffer that holds the message for us (because we don't yet know how long the message string will be).
+	size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
+
+	//Copy the error message into a std::string.
+	std::string message(messageBuffer, size);
+
+	//Free the Win32's string's buffer.
+	LocalFree(messageBuffer);
+
+	return message;
+}
 
 Game::Game()
 {
@@ -43,9 +68,14 @@ Game::Game()
 
 	_running = true;
 
+	configureSerialPort(serial);
+
 	if (SDL_Init(SDL_INIT_EVERYTHING && TTF_Init()) == 0)
 	{
 		std::cout << "Subsystems Initialized...\n";
+	}
+	else {
+		std::cout << GetLastErrorAsString() << std::endl;
 	}
 
 	victory = false;
@@ -132,10 +162,10 @@ void Game::initializeAliens()
 
 void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, int randomAlien3, int randomAlien4, int randomAlien5, int randomAlien6, int randomAlien7, int randomAlien8)
 {
-	if (readFromPort(serialHandle) == "RESTART") {
-		restart = true;
-		std::cout << "Restart\n";
-	}
+	char buffer[1024];
+	serial.readString(buffer, '\n', sizeof(buffer), 2000);
+	std::cout << "Buffer: " << buffer << std::endl;
+	
 
 	//std::cout << readFromPort(serialHandle) << "\n";
 	while (SDL_PollEvent(&event))
@@ -166,9 +196,6 @@ void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, in
 				restart = true;
 				break;
 			}
-
-			
-
 		}
 	
 		player.handleEvent(event);
@@ -728,7 +755,7 @@ void Game::clean()
 	SDL_DestroyWindow(graphics.getWindow());
 	SDL_DestroyRenderer(graphics.getRenderer());
 	SDL_Quit();
-	CloseHandle(serialHandle);
+	serial.closeDevice();
 	std::cout << "Bullet vector size: \n" << bullets.size() << std::endl;
 	std::cout << "Aliens1 vector size: \n" << aliens1.size() << std::endl;
 	std::cout << "Game Cleaned!\n";

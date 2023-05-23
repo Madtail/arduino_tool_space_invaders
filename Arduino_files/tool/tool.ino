@@ -1,10 +1,10 @@
 void setup() {
   Serial.begin(9600);
-  Serial.println("RESTART");
-  Serial.end();
 }
 
 void loop() {
-
-  
+  //char buffer[1024] = "RESTART";
+  //Serial.write(buffer, sizeof(buffer));
+  Serial.write("RESTART\n");
+  delay(2000);
 }

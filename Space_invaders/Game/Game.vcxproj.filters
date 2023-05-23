@@ -36,6 +36,9 @@
     <ClCompile Include="box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="serialib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="serialport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="box.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serialib.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="serialport.h">
       <Filter>Source Files</Filter>
