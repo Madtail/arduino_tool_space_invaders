@@ -1,10 +1,10 @@
 ﻿  game.cpp
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(211,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(227,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(243,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(259,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(275,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(291,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(307,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(323,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(236,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(252,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(268,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(284,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(300,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(316,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(332,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\programming\c++\arduino_tool_space_invaders\Space_invaders\Game\game.cpp(348,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Game.vcxproj -> C:\programming\c++\arduino_tool_space_invaders\Space_invaders\x64\Debug\Game.exe

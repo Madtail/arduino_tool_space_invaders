@@ -7,7 +7,8 @@
 #include <ctime>
 #include <SDL_ttf.h>
 #include <string>
-#include "serialport.h"
+//#include "serialport.h"
+#include "serialib.h"
 #include "graphics.h"
 #include "bullet.h"
 #include "alien.h"
@@ -26,13 +27,16 @@ public:
 		return _running;
 	}
 
-	void handleEvents(int randomNumber, int randomAlien1, int randomAlien2, int randomAlien3, int randomAlien4, int randomAlien5, int randomAlien6, int randomAlien7, int randomAlien8);
+	void handleEvents(std::string message, int randomNumber, int randomAlien1, int randomAlien2, int randomAlien3, int randomAlien4, int randomAlien5, int randomAlien6, int randomAlien7, int randomAlien8);
 	void update();
 	void render();
 	void clean();
 	
 	
 	bool restart;
+	bool left;
+	bool right;
+	bool shoot;
 
 	void restartGame();
 
@@ -47,7 +51,8 @@ public:
 	SDL_Texture* gameOverMessage;
 	SDL_Rect gameOverMessageRect;
 
-	int highScore;
+	int score;
+	int highestHighScore;
 	std::string highScoreString;
 	SDL_Surface* surfacehighScoreMessage;
 	SDL_Texture* highScoreMessage;

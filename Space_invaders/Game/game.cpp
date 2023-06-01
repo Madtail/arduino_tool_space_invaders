@@ -19,7 +19,6 @@ int aliens6Ypos = 270;
 int aliens7Ypos = 320;
 int aliens8Ypos = 370;
 
-
 Uint32 tempAlienTime = -1000;
 
 Uint32 bulletStartTime = -1000;
@@ -28,12 +27,9 @@ Uint32 scoreTime = -1000;
 
 SDL_Event Game::event;
 
-
 Graphics graphics;
 Player player;
 
-// Open serial port object
-static serialib serial;
 
 
 //Returns the last Win32 error, in string format. Returns an empty string if there is no error.
@@ -64,11 +60,13 @@ std::string Game::GetLastErrorAsString()
 Game::Game()
 {
 	restart = false;
-	
+	left = false;
+	right = false;
+	shoot = false;
 
 	_running = true;
 
-	configureSerialPort(serial);
+	
 
 	if (SDL_Init(SDL_INIT_EVERYTHING && TTF_Init()) == 0)
 	{
@@ -80,7 +78,8 @@ Game::Game()
 
 	victory = false;
 
-	highScore = 0;
+	score = 0;
+	highestHighScore = 1000;
 	highScoreMessageRect.x = 0;
 	highScoreMessageRect.y = 0;
 	highScoreMessageRect.w = 200;
@@ -115,7 +114,7 @@ void Game::restartGame()
 	aliens7.clear();
 	aliens8.clear();
 
-	highScore = 0;
+	score = 0;
 	player.isDestroyed = false;
 
 	initializeAliens();
@@ -160,16 +159,42 @@ void Game::initializeAliens()
 	}
 }
 
-void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, int randomAlien3, int randomAlien4, int randomAlien5, int randomAlien6, int randomAlien7, int randomAlien8)
-{
-	char buffer[1024];
-	serial.readString(buffer, '\n', sizeof(buffer), 2000);
-	std::cout << "Buffer: " << buffer << std::endl;
-	
+void Game::handleEvents(std::string message, int randomNumber, int randomAlien1, int randomAlien2, int randomAlien3, int randomAlien4, int randomAlien5, int randomAlien6, int randomAlien7, int randomAlien8)
+{	
+	std::cout << "Message: " << message << std::endl;
 
-	//std::cout << readFromPort(serialHandle) << "\n";
+	if (message == "RESTART\n") {
+		restart = true;
+		message = "";
+	}
+
+	if (message == "LEFT\n") {
+		left = true;
+		player.velX -= player.PLAYER_VEL;
+		player.move();
+		message = "";
+	}
+	if (message == "RIGHT\n") {
+		right = true;
+		player.velX += player.PLAYER_VEL;
+		player.move();
+		message = "";
+	}
+	if (message == "SHOOT\n") {
+		shoot = true;
+		if ((SDL_GetTicks() - bulletStartTime) >= 500 && player.isDestroyed != true) {
+			bulletStartTime = SDL_GetTicks();
+			bullets.push_back(Bullet());
+			bullets.back().bulletXpos = player.getXPos() + 8;
+			bullets.back().bulletYpos = player.getYPos() - 16;
+		}
+		message = "";
+	}
+
 	while (SDL_PollEvent(&event))
 	{
+		
+
 		switch (event.type)
 		{
 		case SDL_QUIT:
@@ -196,6 +221,7 @@ void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, in
 				restart = true;
 				break;
 			}
+
 		}
 	
 		player.handleEvent(event);
@@ -203,7 +229,7 @@ void Game::handleEvents(int randomNumber, int randomAlien1, int randomAlien2, in
 		if ((SDL_GetTicks() - scoreTime >= 2000) && player.isDestroyed != true && victory != true)
 		{
 			scoreTime = SDL_GetTicks();
-			highScore++;
+			score++;
 		}
 
 		if (randomAlien1 >= aliens1.size())
@@ -694,9 +720,12 @@ void Game::render()
 	{
 		graphics.render(victoryMessage, gameOverMessageRect.x, gameOverMessageRect.y);
 		victory = true;
+		if (score < highestHighScore) {
+			highestHighScore = score;
+		}
 	}
 
-	highScoreString = std::to_string(highScore);
+	highScoreString = std::to_string(score);
 	char const* pchar = highScoreString.c_str();
 	surfacehighScoreMessage = TTF_RenderUTF8_Blended(font, pchar, white);
 	highScoreMessage = SDL_CreateTextureFromSurface(graphics.getRenderer(), surfacehighScoreMessage);
@@ -755,7 +784,7 @@ void Game::clean()
 	SDL_DestroyWindow(graphics.getWindow());
 	SDL_DestroyRenderer(graphics.getRenderer());
 	SDL_Quit();
-	serial.closeDevice();
+
 	std::cout << "Bullet vector size: \n" << bullets.size() << std::endl;
 	std::cout << "Aliens1 vector size: \n" << aliens1.size() << std::endl;
 	std::cout << "Game Cleaned!\n";

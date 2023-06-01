@@ -30,11 +30,17 @@ void configureSerialPort(serialib serial)
 {
 	// Connection to serial port
 	char errorOpening = serial.openDevice("\\\\.\\COM3", 115200);
-
+	 
 	if (errorOpening == 1) {
 		std::cout << "Successfully opened device\n";
 	}
 	else {
 		std::cout << GetLastErrorAsString() << std::endl;
 	}
+}
+
+std::string getMessage(serialib serial, char buffer[15])
+{
+	serial.readString(buffer, '\n', 15, 2000);
+	return buffer;
 }

@@ -65,10 +65,10 @@
     <ClInclude Include="box.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="serialib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="serialport.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serialib.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -32,10 +32,12 @@ public:
 
 	bool isDestroyed;
 
-private:
-	// Position and velocity
-	int xpos, ypos;
 	int velX, velY;
+
+private:
+	// Position
+	int xpos, ypos;
+	
 
 
 
